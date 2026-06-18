@@ -42,27 +42,28 @@ cp -r premium-design-loop ~/.claude/skills/
 
 ## 实战演示:guobi.ai 首页
 
-用 `premium-design-loop` 把果比AI 首页从默认「AI 味」页面迭代到「暖版 Apple + 光影」。点击任意图看大图:
+用 `premium-design-loop` 把果比AI 首页从默认「AI 味」页面迭代到「暖版 Apple + 光影」。每张是该轮**优化后**的状态:
 
-<p align="center">
-  <a href="assets/01-original.png"><img src="assets/01-original.png" width="140" alt="原始"></a>
-  &nbsp;→&nbsp;
-  <a href="assets/02-round1.png"><img src="assets/02-round1.png" width="140" alt="第1轮"></a>
-  &nbsp;→&nbsp;
-  <a href="assets/03-round2.png"><img src="assets/03-round2.png" width="140" alt="第2轮"></a>
-  &nbsp;→&nbsp;
-  <a href="assets/04-round3.png"><img src="assets/04-round3.png" width="140" alt="第3轮"></a>
-  &nbsp;→&nbsp;
-  <a href="assets/05-round4.png"><img src="assets/05-round4.png" width="140" alt="第4轮"></a>
-  &nbsp;→&nbsp;
-  <a href="assets/06-final.png"><img src="assets/06-final.png" width="140" alt="最终"></a>
-</p>
+**原始** — 默认系统字、扁平等权卡片、大片死空白、新闻味文案。
 
-<p align="center"><sub>原始　→　第1轮 排版层级　→　第2轮 图标系统+主张　→　第3轮 主推卡　→　第4轮 跨栏Hero　→　最终 暖版Apple+光影</sub></p>
+![原始](assets/01-original.png)
 
-- **原始** — 默认系统字、扁平等权卡片、大片死空白、新闻味文案。
-- **第 1 轮** — 衬线大标题、卡片序号分级、暖色光晕背景、文案去模板化。
-- **第 2 轮** — 统一线性图标系统、「结论 · 判断 · 风险信号」价值条、修复对比度。
-- **第 3 轮** — 日报做成主推卡(暖金渐变 + 反白图标 + 「今日」标签)。
-- **第 4 轮** — 日报升级为跨栏全宽 hero、副标题改衬线,建立三级字阶。
-- **最终** — 超大衬线标题、漂浮暖光球、颗粒质感、漂移蓝图网格、mono 技术标签、光标视差,定位重塑为「AI 试验场」。
+**第 1 轮 · 排版与层级** — 衬线大标题、卡片序号分级、暖色光晕背景、文案去模板化。
+
+![第1轮](assets/02-round1.png)
+
+**第 2 轮 · 图标系统 + 主张** — 统一线性图标系统、「结论 · 判断 · 风险信号」价值条、修复对比度。
+
+![第2轮](assets/03-round2.png)
+
+**第 3 轮 · 主推卡** — 日报做成主推卡(暖金渐变 + 反白图标 + 「今日」标签)。
+
+![第3轮](assets/04-round3.png)
+
+**第 4 轮 · 跨栏 Hero** — 日报升级为跨栏全宽 hero、副标题改衬线,建立三级字阶。
+
+![第4轮](assets/05-round4.png)
+
+**最终 · 暖版 Apple + 光影** — 超大衬线标题、漂浮暖光球、颗粒质感、漂移蓝图网格、mono 技术标签、光标视差,定位重塑为「AI 试验场」。
+
+![最终](assets/06-final.png)
