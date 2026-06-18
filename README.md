@@ -4,57 +4,65 @@
 
 ## 安装
 
-把某个 skill 文件夹复制进你的技能目录,然后在 Claude Code 里调用:
+把某个 skill 文件夹复制进你的技能目录:
 
 ```bash
 cp -r premium-design-loop ~/.claude/skills/
-# 然后: /premium-design-loop
 ```
 
 ## 技能列表
 
 | 技能 | 作用 |
 |------|------|
-| **premium-design-loop** | 把网页的视觉质感逐轮迭代到「高级」。每轮:渲染 → 12 维打分 → 优化最弱维度 → 重新打分,带前后对比截图。覆盖排版、层级、配色、光影动效、移动端、可访问性、收尾细节。面向「做得更高级 / 更贵 / 更有质感」的需求。 |
+| **premium-design-loop** | 把网页视觉质感逐轮迭代到「高级」。每轮:渲染 → 12 维打分 → 优化最弱维度 → 重新打分,带前后对比截图。覆盖排版、层级、配色、光影动效、移动端、可访问性、收尾细节。 |
 
----
+## 使用方法
+
+`premium-design-loop` 为例:
+
+```text
+/premium-design-loop <本地路径 或 URL>
+# 例:/premium-design-loop ./web        把本地项目某页做得更高级
+#     /premium-design-loop https://你的站.com/
+```
+
+调用后它会:
+
+1. **配置**——问几个关键项:平台范围(PC / 移动 / 双端)、**参照品牌**(Apple / Linear / Stripe…,让打分有锚)、光影强度、运行模式(`Auto` 跑完出报告 / `Step` 每轮暂停确认)。
+2. **逐轮迭代**——截图 → 派评审 subagent 按 12 维打分并指出最弱项 → 优化 → 重新截图对比 → 再打分。
+3. **产出**——每轮 `before / after` 对比截图(存 `.design-shots/`)、改动清单、分数演进,以及还差什么的建议。源码每轮自动 checkpoint(可回滚)。
+
+## 注意事项
+
+- **需要能渲染页面**:接 `chrome-devtools` MCP 或 Claude in Chrome 最佳;否则只能从源码「估」,颜色/动效/移动端的分都不准。
+- **光影 / 动效靠静态截图判不了**:这类要开本地预览**实时看**或录 GIF,按「快一点 / 少一点 / 去掉」逐次微调——不要凭截图就签收。
+- **大型在用组件**(几千行的工具页):默认安全层先行,**不碰业务逻辑**,重排 / 删内容 / 改导航这类结构性改动会**先停下问你**(多是产品决策)。
+- **12 维分数是「循环驱动器」,不是精确指标**——它会因锚定而虚高。真正看的是**前后对比图 + 你自己的眼睛**。
+- **会改你的源码文件**:确保在 git 仓库或有备份(skill 每轮自动 checkpoint 到 `.design-backups/`)。改完只在本地,**不会自动部署**。
 
 ## 实战演示:guobi.ai 首页
 
-用 `premium-design-loop` 对果比AI 首页做的一次真实迭代,从默认 AI 味页面到「暖版 Apple + 光影」。每张图是该轮**优化后**的状态。
+用 `premium-design-loop` 把果比AI 首页从默认「AI 味」页面迭代到「暖版 Apple + 光影」。点击任意图看大图:
 
-### 原始
+<p align="center">
+  <a href="assets/01-original.png"><img src="assets/01-original.png" width="140" alt="原始"></a>
+  &nbsp;→&nbsp;
+  <a href="assets/02-round1.png"><img src="assets/02-round1.png" width="140" alt="第1轮"></a>
+  &nbsp;→&nbsp;
+  <a href="assets/03-round2.png"><img src="assets/03-round2.png" width="140" alt="第2轮"></a>
+  &nbsp;→&nbsp;
+  <a href="assets/04-round3.png"><img src="assets/04-round3.png" width="140" alt="第3轮"></a>
+  &nbsp;→&nbsp;
+  <a href="assets/05-round4.png"><img src="assets/05-round4.png" width="140" alt="第4轮"></a>
+  &nbsp;→&nbsp;
+  <a href="assets/06-final.png"><img src="assets/06-final.png" width="140" alt="最终"></a>
+</p>
 
-默认系统字、扁平等权卡片、大片死空白、新闻味文案——典型「AI 生成感」。
+<p align="center"><sub>原始　→　第1轮 排版层级　→　第2轮 图标系统+主张　→　第3轮 主推卡　→　第4轮 跨栏Hero　→　最终 暖版Apple+光影</sub></p>
 
-![原始](assets/01-original.png)
-
-### 第 1 轮 · 排版与层级
-
-衬线大标题取代 24px 弱标题、卡片加序号分级、暖色光晕背景、文案去模板化。
-
-![第1轮](assets/02-round1.png)
-
-### 第 2 轮 · 图标系统 + 主张
-
-统一线性图标系统、「结论 · 判断 · 风险信号」价值条把主张落进版式、修复对比度不足的小字。
-
-![第2轮](assets/03-round2.png)
-
-### 第 3 轮 · 主推卡强化
-
-日报做成视觉主导的主卡:暖金渐变实底 + 反白图标 + 「今日」实时标签。
-
-![第3轮](assets/04-round3.png)
-
-### 第 4 轮 · 跨栏 Hero
-
-日报升级为跨栏全宽 hero 主卡、副标题改衬线,建立 display→sub→body 三级字阶。
-
-![第4轮](assets/05-round4.png)
-
-### 最终 · 暖版 Apple + 光影
-
-超大衬线标题、漂浮暖光球、胶片颗粒质感、缓慢漂移的蓝图网格、等宽 mono 技术标签、光标视差,定位重塑为「AI 试验场」。
-
-![最终](assets/06-final.png)
+- **原始** — 默认系统字、扁平等权卡片、大片死空白、新闻味文案。
+- **第 1 轮** — 衬线大标题、卡片序号分级、暖色光晕背景、文案去模板化。
+- **第 2 轮** — 统一线性图标系统、「结论 · 判断 · 风险信号」价值条、修复对比度。
+- **第 3 轮** — 日报做成主推卡(暖金渐变 + 反白图标 + 「今日」标签)。
+- **第 4 轮** — 日报升级为跨栏全宽 hero、副标题改衬线,建立三级字阶。
+- **最终** — 超大衬线标题、漂浮暖光球、颗粒质感、漂移蓝图网格、mono 技术标签、光标视差,定位重塑为「AI 试验场」。
